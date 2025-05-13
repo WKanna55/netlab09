@@ -29,6 +29,16 @@ public class ClientRepository : Repository<Client>, IClientRepository
         return clients;
     }
     
+    /*
+     * LAB09 - ejemplo 01
+     */
+    public Task<IQueryable<Client>> GetClientWithOrders()
+    {
+        var clientOrders = _context.Clients
+            .AsNoTracking();
+
+        return Task.FromResult<IQueryable<Client>>(clientOrders);
+    }
     
     
 }

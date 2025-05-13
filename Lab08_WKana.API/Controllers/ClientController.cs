@@ -26,4 +26,17 @@ public class ClientController : ControllerBase
         return Ok(clients);
     }
     
+    /*
+     * LAB 09 - ejemplo 1
+     * 
+     */
+    [HttpGet("LAB09/ej1/orders")]
+    public async Task<IActionResult> GetCLientsWithOrders()
+    {
+
+        var clientes = await _clientService.GetCLientWithOrders();
+
+        return Ok(clientes);
+    }
+    
 }

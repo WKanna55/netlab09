@@ -1,8 +1,10 @@
 using Lab08_WKana.Application.Dtos.Client;
+using Lab08_WKana.Application.Dtos.Order;
 using Lab08_WKana.Application.Interfaces;
 using Lab08_WKana.Domain.Interfaces;
 using Lab08_WKana.Domain.Interfaces.Base;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lab08_WKana.Application.Services;
 
@@ -22,5 +24,33 @@ public class ClientService : IClientService
         return clients.Adapt<List<ClientGetDto>>();
         
     }
+    
+    
+    /*
+     * LAB09 - ejemplo 01
+     * 
+     */
+    public async Task<List<ClientOrderDto>> GetCLientWithOrders()
+    {
+        var query = await _unitOfWork.Clients.GetClientWithOrders();
+
+        //nulo
+        //var clientes = query.Adapt<List<ClientOrderDto>>().ToList();
+
+        var clientes = await query.Select(c => new ClientOrderDto()
+        {
+            ClientName = c.Name,
+            Orders = c.Orders.Select(o => new OrderDto
+            {
+                OrderId = o.Orderid,
+                OrderDate = o.Orderdate
+            }).ToList()
+        }).ToListAsync();
+        
+        return clientes;
+
+    }
+    
+    
     
 }

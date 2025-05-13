@@ -40,5 +40,25 @@ public class ClientRepository : Repository<Client>, IClientRepository
         return Task.FromResult<IQueryable<Client>>(clientOrders);
     }
     
+    /*
+     * LAB09 - ejemplo 01, variacion no queryable
+     */
+    public async Task<List<Client>> GetClientWithOrdersComplete()
+    {
+        var clientOrders = await _context.Clients
+            .AsNoTracking()
+            .Select(c => new Client
+            {
+                Name = c.Name,
+                Orders = c.Orders.Select(o => new Order
+                {
+                    Orderid = o.Orderid,
+                    Orderdate = o.Orderdate
+                }).ToList()
+            }).ToListAsync();
+
+        return clientOrders;
+    }
+    
     
 }

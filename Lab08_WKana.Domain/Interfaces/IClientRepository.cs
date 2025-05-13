@@ -7,4 +7,5 @@ public interface IClientRepository: IRepository<Client>
 {
     Task<List<Client>> GetClientsByNameStart(string nameStart);
     Task<IQueryable<Client>> GetClientWithOrders();
+    Task<List<Client>> GetClientWithOrdersComplete();
 }

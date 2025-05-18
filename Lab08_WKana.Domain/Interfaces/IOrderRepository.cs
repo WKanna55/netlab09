@@ -7,4 +7,5 @@ public interface IOrderRepository: IRepository<Order>
 {
     Task<List<Order>> GetOrdersAfterDateAsync(DateTime date);
     Task<(int ClientId, int OrderCount)> GetClientWithMostOrdersAsync();
+    IQueryable<Order> GetOrderWithProducts(); // Lab09 - Ejercicio 02
 }

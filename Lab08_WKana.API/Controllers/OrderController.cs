@@ -30,4 +30,13 @@ public class OrderController : ControllerBase
         return Ok(new { ClientId = result.ClientId, OrderCount = result.OrderCount });
     }
     
+    /*
+     * Lab09 - ejercicio 02
+     */
+    [HttpGet("Lab09/ej2/orderWithDetails")]
+    public async Task<ActionResult> GetOrderWithDetails()
+    {
+        var orderDetails = await _orderService.GetOrderWithDetails();
+        return Ok(orderDetails);
+    }
 }

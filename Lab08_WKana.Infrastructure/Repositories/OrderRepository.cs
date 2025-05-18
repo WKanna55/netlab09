@@ -42,4 +42,16 @@ public class OrderRepository : Repository<Order>, IOrderRepository
         return (result.ClientId, result.OrderCount);
     }
     
+    /*
+     * Lab 09 - Ejercicio 02
+     */
+    public IQueryable<Order> GetOrderWithProducts()
+    {
+        var query = _context.Orders
+            .Include(order => order.Orderdetails)
+            .ThenInclude(orderDetail => orderDetail.Product)
+            .AsNoTracking();
+        return query;
+    }
+    
 }

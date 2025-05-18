@@ -88,6 +88,20 @@ public class ClientService : IClientService
 
     }
     
+    /*
+     * LAB09 - ejercicio 03
+     */
+    public async Task<List<ClientTotalProductsDto>> GetClientWithTotalProducts()
+    {
+        var query = _unitOfWork.Clients.GetClientsQuery();
+        var clients = await query.Select(c => new ClientTotalProductsDto
+        {
+            ClientName = c.Name,
+            TotalProducts = c.Orders.Sum(o => o.Orderdetails.Sum(d => d.Quantity))
+        }).ToListAsync();
+        return clients;
+    }
+    
     
     
 }

@@ -39,4 +39,17 @@ public class ClientController : ControllerBase
         return Ok(clientes);
     }
     
+    /*
+     * LAB 09 - ejercicio 03
+     *
+     */
+    [HttpGet("LAB09/ej3/clientWithTotalProducts")]
+    public async Task<IActionResult> clientWithTotalProducts()
+    {
+
+        var clientes = await _clientService.GetClientWithTotalProducts();
+
+        return Ok(clientes);
+    }
+    
 }

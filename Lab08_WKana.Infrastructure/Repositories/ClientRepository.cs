@@ -63,5 +63,13 @@ public class ClientRepository : Repository<Client>, IClientRepository
         return clientOrders;
     }
     
+    /*
+     * Lab09 - ejercicio 03
+     */
+    public IQueryable<Client> GetClientsQuery()
+    {
+        var query = _context.Clients.AsNoTracking();
+        return query;
+    }
     
 }

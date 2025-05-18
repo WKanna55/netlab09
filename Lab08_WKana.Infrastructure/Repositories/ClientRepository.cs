@@ -42,6 +42,9 @@ public class ClientRepository : Repository<Client>, IClientRepository
     
     /*
      * LAB09 - ejemplo 01, variacion no queryable
+     * se puede quitar el Client o Order redundante, pero se tendria que devolver
+     * con tuplas u otros datos tipados, tambien genericos pero no es recomendado
+     * ya que no se puede acceder sencillamente a sus propiedades 
      */
     public async Task<List<Client>> GetClientWithOrdersComplete()
     {

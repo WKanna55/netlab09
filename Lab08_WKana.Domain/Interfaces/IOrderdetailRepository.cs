@@ -10,4 +10,7 @@ public interface IOrderdetailRepository : IRepository<Orderdetail>
     Task<List<(int OrderId, string ProductName, int Quantity)>> GetAllOrderDetailsWithProductNameAsync();
     Task<List<string>> GetProductsSoldToClientAsync(int clientId);
     Task<List<string>> GetClientsWhoBoughtProductAsync(int productId);
+    
+    // LAB09
+    IQueryable<Order> QueryOrderWithDetailsAndProducts();
 }

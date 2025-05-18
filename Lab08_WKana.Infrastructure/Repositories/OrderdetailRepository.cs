@@ -79,4 +79,17 @@ public class OrderdetailRepository : Repository<Orderdetail>, IOrderdetailReposi
         return result;
     }
     
+    /*
+     * LAB 09 - ejemplo 2
+     */
+    public IQueryable<Order> QueryOrderWithDetailsAndProducts()
+    {
+        var ordersWithDetails = _context.Orders
+            .Include(order => order.Orderdetails)
+            .ThenInclude(orderDetail => orderDetail.Product)
+            .AsNoTracking();
+
+        return ordersWithDetails;
+    }
+    
 }
